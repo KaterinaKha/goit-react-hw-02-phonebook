@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
+import { FilterContacts } from './Filter/Filter';
 
 export class App extends Component {
   state = {
     contacts: [],
+    filter: '',
   };
 
   addContact = data => {
@@ -23,20 +25,37 @@ export class App extends Component {
   };
 
   deleteContact = contactId => {
-    console.log(contactId);
     this.setState({
       contacts: this.state.contacts.filter(contact => contact.id !== contactId),
     });
   };
 
+  filterContact = event => {
+    this.setState({ filter: event.target.value });
+  };
+
+  filteredContactsList = () => {
+    const { contacts, filter } = this.state;
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   render() {
-    const { contacts } = this.state;
     return (
       <>
         <h1>Phonebook</h1>
         <ContactForm addContact={this.addContact} />
-        <ContactList contacts={contacts} onDeleteContact={this.deleteContact} />
+
+        <FilterContacts
+          value={this.state.filter}
+          onFilterInput={this.filterContact}
+        />
         <h2>Contacts</h2>
+        <ContactList
+          contacts={this.filteredContactsList()}
+          onDeleteContact={this.deleteContact}
+        />
       </>
     );
   }
