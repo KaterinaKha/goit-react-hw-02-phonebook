@@ -47,11 +47,11 @@ export class App extends Component {
         <h1>Phonebook</h1>
         <ContactForm addContact={this.addContact} />
 
+        <h2>Contacts</h2>
         <FilterContacts
           value={this.state.filter}
           onFilterInput={this.filterContact}
         />
-        <h2>Contacts</h2>
         <ContactList
           contacts={this.filteredContactsList()}
           onDeleteContact={this.deleteContact}

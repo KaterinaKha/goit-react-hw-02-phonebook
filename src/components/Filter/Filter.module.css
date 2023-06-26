@@ -1,12 +1,11 @@
 .filterContainer {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
 }
 .filterTitle {
   font-size: 20px;
 }
 .filterInput {
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 15px;
   padding: 5px;
   font-style: italic;
